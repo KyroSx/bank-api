@@ -55,4 +55,18 @@ describe("Db Add Transaction (Data)", () => {
 
     expect(fetchBalanceRepository.calls).toBe(0);
   });
+
+  it("should return null if Outcome is greater than balance", async () => {
+    const { sut, fetchBalanceRepository } = makeSut();
+
+    fetchBalanceRepository.model = { total: 0, income: 0, outcome: 0 };
+
+    const addTransactionParams = mockAddTransactionParams();
+    addTransactionParams.type = "outcome";
+    addTransactionParams.value = 10;
+
+    const response = await sut.add(addTransactionParams);
+
+    expect(response).toBeNull();
+  });
 });
