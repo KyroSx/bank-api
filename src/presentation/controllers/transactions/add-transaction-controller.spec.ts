@@ -1,7 +1,7 @@
 import { makeAddTransactionSpy } from "@/presentation/tests/mock-transaction-usecase";
 import { mockThrowError } from "@/domain/tests/mock-throw-error";
 import { makeValidationSpy } from "@/presentation/tests/mock-validation";
-import { badRequest } from "@/presentation/helpers/http-helper";
+import { badRequest, success } from "@/presentation/helpers/http-helper";
 import { AddTransactionController } from "./add-transaction-controller";
 
 const makeSut = () => {
@@ -62,5 +62,13 @@ describe("Add Transaction Controller (Presentation)", () => {
     const httpResponse = await sut.handle(mockHttpRequest());
 
     expect(httpResponse).toEqual(badRequest(error));
+  });
+
+  it("should return success (200) if AddTransaction succeed", async () => {
+    const { sut, addTransactionSpy } = makeSut();
+
+    const httpResponse = await sut.handle(mockHttpRequest());
+
+    expect(httpResponse).toEqual(success(addTransactionSpy.model));
   });
 });

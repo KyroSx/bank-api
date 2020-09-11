@@ -1,4 +1,4 @@
-import { badRequest } from "@/presentation/helpers/http-helper";
+import { badRequest, success } from "@/presentation/helpers/http-helper";
 import {
   IAddTransaction,
   IValidation,
@@ -22,8 +22,13 @@ export class AddTransactionController implements IController {
 
     const { title, value, type, category } = httpRequest.body;
 
-    await this.addTransaction.add({ title, value, type, category });
+    const transaction = await this.addTransaction.add({
+      title,
+      value,
+      type,
+      category,
+    });
 
-    return { statusCode: 0 };
+    return success(transaction);
   }
 }
