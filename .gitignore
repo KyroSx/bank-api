@@ -6,3 +6,6 @@ yarn.lock
 
 # build files
 dist
+
+# tests
+coverage
