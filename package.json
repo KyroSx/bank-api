@@ -5,6 +5,7 @@
   "author": "Leonardo <leolub150@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^26.0.13",
     "@types/node": "^14.10.0",
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "@typescript-eslint/parser": "^4.1.0",
@@ -16,8 +17,18 @@
     "eslint-plugin-prettier": "^3.1.4",
     "git-commit-msg-linter": "^2.6.0",
     "husky": "^4.3.0",
+    "jest": "^26.4.2",
     "lint-staged": "^10.3.0",
     "prettier": "^2.1.1",
+    "ts-jest": "^26.3.0",
     "typescript": "^4.0.2"
+  },
+  "scripts": {
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test:verbose": "jest --passWithNoTests",
+    "test:unit": "yarn test --watch -c jest-unit-config.js",
+    "test:integration": "yarn test --watch -c jest-integration-config.js",
+    "test:staged": "yarn test --findRelatedTests",
+    "test:ci": "yarn test --coverage"
   }
 }
