@@ -1,5 +1,5 @@
 import { AddTransactionParams } from "@/domain/usecases/add-transaction";
-import { makeFetchOrAddCategoryRepositorySpy } from "@/data/tests/mock-fetch-or-add-category-repository";
+import { makeFetchOrAddCategoryRepositorySpy } from "@/data/tests/make-fetch-or-add-category-repository-spy";
 import { DbAddTransaction } from "./db-add-transaction";
 
 const makeSut = () => {
