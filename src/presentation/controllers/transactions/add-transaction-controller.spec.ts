@@ -1,4 +1,5 @@
 import { makeAddTransactionSpy } from "@/presentation/tests/mock-transaction-usecase";
+import { mockThrowError } from "@/domain/tests/mock-throw-error";
 import { AddTransactionController } from "./add-transaction-controller";
 
 const makeSut = () => {
@@ -26,5 +27,15 @@ describe("Add Transaction Controller (Presentation)", () => {
     await sut.handle(httpRequest);
 
     expect(addTransactionSpy.params).toEqual(httpRequest.body);
+  });
+
+  it("should not catch error if AddTransaction throws", async () => {
+    const { sut, addTransactionSpy } = makeSut();
+
+    jest.spyOn(addTransactionSpy, "add").mockImplementationOnce(mockThrowError);
+
+    const promise = sut.handle(mockHttpRequest());
+
+    await expect(promise).rejects.toThrow();
   });
 });

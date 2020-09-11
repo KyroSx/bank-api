@@ -7,7 +7,5 @@ export class AddTransactionController {
     const { title, value, type, category } = httpRequest.body;
 
     await this.addTransaction.add({ title, value, type, category });
-
-    return null;
   }
 }
