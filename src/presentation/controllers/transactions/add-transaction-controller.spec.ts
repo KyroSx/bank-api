@@ -1,6 +1,7 @@
 import { makeAddTransactionSpy } from "@/presentation/tests/mock-transaction-usecase";
 import { mockThrowError } from "@/domain/tests/mock-throw-error";
 import { makeValidationSpy } from "@/presentation/tests/mock-validation";
+import { badRequest } from "@/presentation/helpers/http-helper";
 import { AddTransactionController } from "./add-transaction-controller";
 
 const makeSut = () => {
@@ -49,5 +50,17 @@ describe("Add Transaction Controller (Presentation)", () => {
     await sut.handle(httpRequest);
 
     expect(validationSpy.params).toEqual(httpRequest.body);
+  });
+
+  it("should return bad-request (400) if Validation return Error", async () => {
+    const { sut, validationSpy } = makeSut();
+
+    const error = new Error("Error Spy");
+
+    validationSpy.error = error;
+
+    const httpResponse = await sut.handle(mockHttpRequest());
+
+    expect(httpResponse).toEqual(badRequest(error));
   });
 });

@@ -1,3 +1,4 @@
+import { badRequest } from "@/presentation/helpers/http-helper";
 import {
   IAddTransaction,
   IValidation,
@@ -13,7 +14,11 @@ export class AddTransactionController implements IController {
   ) {}
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-    await this.validation.validate(httpRequest.body);
+    const error = await this.validation.validate(httpRequest.body);
+
+    if (error) {
+      return badRequest(error);
+    }
 
     const { title, value, type, category } = httpRequest.body;
 
