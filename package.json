@@ -21,14 +21,21 @@
     "lint-staged": "^10.3.0",
     "prettier": "^2.1.1",
     "ts-jest": "^26.3.0",
+    "ts-node-dev": "^1.0.0-pre.62",
     "typescript": "^4.0.2"
   },
   "scripts": {
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests",
     "test:unit": "yarn test --watch -c jest-unit-config.js",
     "test:integration": "yarn test --watch -c jest-integration-config.js",
     "test:staged": "yarn test --findRelatedTests",
     "test:ci": "yarn test --coverage"
+  },
+  "dependencies": {
+    "pg": "^8.3.3",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.26"
   }
 }
