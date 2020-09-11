@@ -3,16 +3,20 @@ import {
   IFetchOrAddCategoryRepository,
   IFetchBalanceRepository,
   IAddTransactionRepository,
+  IAddTransaction,
+  TransactionModel,
 } from "./db-add-transaction-protocols";
 
-export class DbAddTransaction {
+export class DbAddTransaction implements IAddTransaction {
   constructor(
     private readonly fetchOrAddCategoryRepository: IFetchOrAddCategoryRepository,
     private readonly fetchBalanceRepository: IFetchBalanceRepository,
     private readonly addTransactionRepository: IAddTransactionRepository,
   ) {}
 
-  async add(addTransactionParams: AddTransactionParams): Promise<any> {
+  async add(
+    addTransactionParams: AddTransactionParams,
+  ): Promise<TransactionModel> {
     const {
       title,
       value,
