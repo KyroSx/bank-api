@@ -44,4 +44,15 @@ describe("Db Add Transaction (Data)", () => {
 
     expect(fetchBalanceRepository.calls).toBe(1);
   });
+
+  it("should not call FetchBalanceRepository if transaction.type is Income", async () => {
+    const { sut, fetchBalanceRepository } = makeSut();
+
+    const addTransactionParams = mockAddTransactionParams();
+    addTransactionParams.type = "income";
+
+    await sut.add(addTransactionParams);
+
+    expect(fetchBalanceRepository.calls).toBe(0);
+  });
 });

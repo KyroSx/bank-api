@@ -11,11 +11,13 @@ export class DbAddTransaction {
   ) {}
 
   async add(addTransactionParams: AddTransactionParams): Promise<any> {
-    await this.fetchOrAddCategoryRepository.fetchByTitle(
-      addTransactionParams.category,
-    );
+    const { type, category: categoryTitle } = addTransactionParams;
 
-    await this.fetchBalanceRepository.fetchBalance();
+    await this.fetchOrAddCategoryRepository.fetchByTitle(categoryTitle);
+
+    if (type === "outcome") {
+      await this.fetchBalanceRepository.fetchBalance();
+    }
 
     return null;
   }
