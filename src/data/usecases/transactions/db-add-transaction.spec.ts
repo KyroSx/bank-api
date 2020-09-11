@@ -1,12 +1,17 @@
 import { AddTransactionParams } from "@/domain/usecases/add-transaction";
 import { makeFetchOrAddCategoryRepositorySpy } from "@/data/tests/make-fetch-or-add-category-repository-spy";
+import { makeFetchBalanceRepositorySpy } from "@/data/tests/make-fetch-balance-repository-spy";
 import { DbAddTransaction } from "./db-add-transaction";
 
 const makeSut = () => {
+  const fetchBalanceRepository = makeFetchBalanceRepositorySpy();
   const fetchOrAddCategoryRepositorySpy = makeFetchOrAddCategoryRepositorySpy();
-  const sut = new DbAddTransaction(fetchOrAddCategoryRepositorySpy);
+  const sut = new DbAddTransaction(
+    fetchOrAddCategoryRepositorySpy,
+    fetchBalanceRepository,
+  );
 
-  return { sut, fetchOrAddCategoryRepositorySpy };
+  return { sut, fetchOrAddCategoryRepositorySpy, fetchBalanceRepository };
 };
 
 const mockAddTransactionParams = (): AddTransactionParams => ({
@@ -27,5 +32,16 @@ describe("Db Add Transaction (Data)", () => {
     expect(fetchOrAddCategoryRepositorySpy.params).toEqual(
       addTransactionParams.category,
     );
+  });
+
+  it("should call FetchBalanceRepository if transaction.type is Outcome", async () => {
+    const { sut, fetchBalanceRepository } = makeSut();
+
+    const addTransactionParams = mockAddTransactionParams();
+    addTransactionParams.type = "outcome";
+
+    await sut.add(addTransactionParams);
+
+    expect(fetchBalanceRepository.calls).toBe(1);
   });
 });
