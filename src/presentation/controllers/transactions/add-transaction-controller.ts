@@ -1,4 +1,8 @@
-import { badRequest, success } from "@/presentation/helpers/http-helper";
+import {
+  badRequest,
+  success,
+  forbidden,
+} from "@/presentation/helpers/http-helper";
 import {
   IAddTransaction,
   IValidation,
@@ -28,6 +32,10 @@ export class AddTransactionController implements IController {
       type,
       category,
     });
+
+    if (!transaction) {
+      return forbidden(new Error());
+    }
 
     return success(transaction);
   }
