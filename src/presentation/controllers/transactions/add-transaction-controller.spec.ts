@@ -1,12 +1,14 @@
 import { makeAddTransactionSpy } from "@/presentation/tests/mock-transaction-usecase";
 import { mockThrowError } from "@/domain/tests/mock-throw-error";
+import { makeValidationSpy } from "@/presentation/tests/mock-validation";
 import { AddTransactionController } from "./add-transaction-controller";
 
 const makeSut = () => {
+  const validationSpy = makeValidationSpy();
   const addTransactionSpy = makeAddTransactionSpy();
-  const sut = new AddTransactionController(addTransactionSpy);
+  const sut = new AddTransactionController(addTransactionSpy, validationSpy);
 
-  return { sut, addTransactionSpy };
+  return { sut, addTransactionSpy, validationSpy };
 };
 
 const mockHttpRequest = () => ({
@@ -37,5 +39,15 @@ describe("Add Transaction Controller (Presentation)", () => {
     const promise = sut.handle(mockHttpRequest());
 
     await expect(promise).rejects.toThrow();
+  });
+
+  it("should call Validation with correct values", async () => {
+    const { sut, validationSpy } = makeSut();
+
+    const httpRequest = mockHttpRequest();
+
+    await sut.handle(httpRequest);
+
+    expect(validationSpy.params).toEqual(httpRequest.body);
   });
 });
