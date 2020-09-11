@@ -1,4 +1,4 @@
-import { CategoryModel } from "../models/category";
+import { CategoryModel } from "../models";
 
 export const mockCategoryModel = (): CategoryModel => ({
   id: "uuid",

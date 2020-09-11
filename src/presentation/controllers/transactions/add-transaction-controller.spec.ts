@@ -1,11 +1,11 @@
-import { makeAddTransactionSpy } from "@/presentation/tests/mock-transaction-usecase";
 import { mockThrowError } from "@/domain/tests/mock-throw-error";
-import { makeValidationSpy } from "@/presentation/tests/mock-validation";
 import {
   badRequest,
   success,
   forbidden,
 } from "@/presentation/helpers/http-helper";
+import { makeAddTransactionSpy, makeValidationSpy } from "@/presentation/tests";
+import { HttpRequest } from "@/presentation/protocols";
 import { AddTransactionController } from "./add-transaction-controller";
 
 const makeSut = () => {
@@ -16,7 +16,7 @@ const makeSut = () => {
   return { sut, addTransactionSpy, validationSpy };
 };
 
-const mockHttpRequest = () => ({
+const mockHttpRequest = (): HttpRequest => ({
   body: {
     title: "Earnings",
     value: 3000,

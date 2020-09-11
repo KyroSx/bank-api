@@ -2,8 +2,8 @@ import {
   IAddTransaction,
   AddTransactionParams,
 } from "@/domain/usecases/add-transaction";
-import { TransactionModel } from "@/domain/models/transaction";
-import { mockTransactionModel } from "@/domain/tests/mock-transaction-model";
+import { TransactionModel } from "@/domain/models";
+import { mockTransactionModel } from "@/domain/tests";
 
 class AddTransactionSpy implements IAddTransaction {
   params: AddTransactionParams;

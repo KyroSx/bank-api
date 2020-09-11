@@ -1,4 +1,4 @@
-import { IValidation } from "../protocols/validation";
+import { IValidation } from "../protocols";
 
 class ValidationSpy implements IValidation {
   params: any;
