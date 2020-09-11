@@ -8,13 +8,13 @@
     "password": "password",
     "database": "database-name",
     "entities": [
-      "./src/modules/**/infra/typeorm/entities/*.ts"
+      "./src/infra/typeorm/entities/**/*.ts"
     ],
     "migrations": [
-      "./src/shared/infra/typeorm/migrations/*.ts"
+      "./src/infra/typeorm/migrations/**/*.ts"
     ],
     "cli": {
-      "migrationsDir": "./src/shared/infra/typeorm/migrations/"
+      "migrationsDir": "./src/infra/typeorm/migrations/"
     }
   }
 ]
