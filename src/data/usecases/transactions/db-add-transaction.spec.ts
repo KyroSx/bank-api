@@ -1,8 +1,10 @@
-import { AddTransactionParams } from "@/domain/usecases/add-transaction";
-import { makeFetchOrAddCategoryRepositorySpy } from "@/data/tests/make-fetch-or-add-category-repository-spy";
-import { makeFetchBalanceRepositorySpy } from "@/data/tests/make-fetch-balance-repository-spy";
-import { makeAddTransactionRepositorySpy } from "@/data/tests/make-add-transaction-repository-spy";
+import {
+  makeFetchOrAddCategoryRepositorySpy,
+  makeFetchBalanceRepositorySpy,
+  makeAddTransactionRepositorySpy,
+} from "@/data/tests";
 import { DbAddTransaction } from "./db-add-transaction";
+import { AddTransactionParams } from "./db-add-transaction-protocols";
 
 const makeSut = () => {
   const fetchOrAddCategoryRepositorySpy = makeFetchOrAddCategoryRepositorySpy();
