@@ -96,4 +96,16 @@ describe("Db Add Transaction (Data)", () => {
       }),
     );
   });
+
+  it("should return TransactionModel if succeeds", async () => {
+    const { sut } = makeSut();
+
+    const addTransactionParams = mockAddTransactionParams();
+
+    const transaction = await sut.add(addTransactionParams);
+
+    expect(transaction.id).toBeDefined();
+    expect(transaction.category.id).toBeDefined();
+    expect(transaction).toEqual(expect.objectContaining({ ...transaction }));
+  });
 });

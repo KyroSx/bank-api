@@ -25,16 +25,20 @@ export class DbAddTransaction {
     );
 
     if (type === "outcome") {
-      await this.fetchBalanceRepository.fetchBalance();
+      const { total } = await this.fetchBalanceRepository.fetchBalance();
+
+      if (total < value) {
+        return null;
+      }
     }
 
-    await this.addTransactionRepository.add({
+    const transaction = await this.addTransactionRepository.add({
       title,
       value,
       type,
       category,
     });
 
-    return null;
+    return transaction;
   }
 }
