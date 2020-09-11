@@ -1,11 +1,11 @@
 import { TransactionModel, CategoryModel } from "@/domain/models";
-import { Entity, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, Column, ManyToOne, JoinColumn, PrimaryColumn } from "typeorm";
 import { generateUuid } from "@/infra/generators/generate-uuid";
 import { Category } from "./category";
 
 @Entity("transactions")
 export class Transaction implements TransactionModel {
-  @Column("uuid")
+  @PrimaryColumn("uuid")
   id: string = generateUuid();
 
   @Column("varchar")
