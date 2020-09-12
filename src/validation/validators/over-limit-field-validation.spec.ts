@@ -10,7 +10,7 @@ const makeSut = (limit = 0, fieldName = "value") => {
 };
 
 describe("Over Limit Field Validation", () => {
-  it("should return UnderLimitParamError if validation fails", async () => {
+  it("should return BellowZeroParamError if validation fails", async () => {
     const { sut } = makeSut();
 
     const error = await sut.validate({ [fieldName]: -1 });
@@ -18,7 +18,7 @@ describe("Over Limit Field Validation", () => {
     expect(error).toEqual(new BellowZeroParamError(fieldName));
   });
 
-  it("should not return UnderLimitParamError if validation succeeds", async () => {
+  it("should not return BellowZeroParamError if validation succeeds", async () => {
     const { sut } = makeSut();
 
     const error = await sut.validate({ [fieldName]: 1 });
