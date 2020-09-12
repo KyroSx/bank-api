@@ -33,4 +33,12 @@ describe("Validation Composite", () => {
 
     expect(error).toEqual(validationSpies[0].error);
   });
+
+  test("should not return if validation succeeds", async () => {
+    const { sut } = makeSut();
+
+    const error = await sut.validate({ [field]: field });
+
+    expect(error).toBeFalsy();
+  });
 });
