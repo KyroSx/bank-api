@@ -8,7 +8,7 @@ export class AllowedFieldValidation implements IValidation {
   ) {}
 
   async validate(input: any): Promise<Error | null> {
-    if (!this.allowedFields.includes(input)) {
+    if (!this.allowedFields.includes(input[this.fieldName])) {
       return new NotAllowedParamError(this.fieldName);
     }
 

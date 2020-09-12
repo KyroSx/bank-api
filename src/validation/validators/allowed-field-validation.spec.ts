@@ -21,7 +21,7 @@ describe("AllowedField Validation", () => {
   it("should not return NotAllowedParamError if validation succeeds", async () => {
     const { sut } = makeSut();
 
-    const error = await sut.validate(field);
+    const error = await sut.validate({ type: field });
 
     expect(error).toBeFalsy();
   });
