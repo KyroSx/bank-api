@@ -34,4 +34,10 @@ describe("Controller Error Decorator (Main)", () => {
     await sut.handle(httpRequest);
     expect(controllerSpy.httpRequest).toEqual(httpRequest);
   });
+
+  it("should return the same result of the controller-decoratee", async () => {
+    const { sut, controllerSpy } = makeSut();
+    const httpResponse = await sut.handle(mockRequest());
+    expect(httpResponse).toEqual(controllerSpy.httpResponse);
+  });
 });
