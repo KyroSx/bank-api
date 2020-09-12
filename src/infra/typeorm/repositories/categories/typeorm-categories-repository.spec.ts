@@ -1,8 +1,9 @@
 import { createTestConnection } from "@/infra/tests/create-test-connection";
 import { getConnection } from "typeorm";
+import { TypeOrmCategoriesRepository } from "./typeorm-categories-repository";
 
 const makeSut = () => {
-  const sut = null;
+  const sut = new TypeOrmCategoriesRepository();
   return { sut };
 };
 
@@ -19,5 +20,14 @@ describe("TypeOrm Categories Repository (Infra)", () => {
   it("should connect to in-memory database", () => {
     const { sut } = makeSut();
     expect(sut).toBeDefined();
+  });
+
+  it("should add new Category to database", async () => {
+    const { sut } = makeSut();
+
+    const category = await sut.fetchByTitle("any-title");
+
+    expect(category.id).toBeDefined();
+    expect(category).toEqual(expect.objectContaining({ title: "any-title" }));
   });
 });
