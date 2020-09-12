@@ -1,7 +1,6 @@
 import { BellowZeroParamError } from "@/presentation/errors";
 import { OverLimitFieldValidation } from "./over-limit-field-validation";
 
-const fieldValue = 100;
 const fieldName = "value";
 
 const makeSut = (limit = 0, fieldName = "value") => {
@@ -14,8 +13,16 @@ describe("Over Limit Field Validation", () => {
   it("should return UnderLimitParamError if validation fails", async () => {
     const { sut } = makeSut();
 
-    const error = await sut.validate({ [fieldName]: fieldValue });
+    const error = await sut.validate({ [fieldName]: -1 });
 
     expect(error).toEqual(new BellowZeroParamError(fieldName));
+  });
+
+  it("should not return UnderLimitParamError if validation succeeds", async () => {
+    const { sut } = makeSut();
+
+    const error = await sut.validate({ [fieldName]: 1 });
+
+    expect(error).toBeFalsy();
   });
 });

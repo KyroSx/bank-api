@@ -8,6 +8,10 @@ export class OverLimitFieldValidation implements IValidation {
   ) {}
 
   async validate(input: any): Promise<Error | null> {
-    return new BellowZeroParamError(this.fieldName);
+    if (input[this.fieldName] <= this.limit) {
+      return new BellowZeroParamError(this.fieldName);
+    }
+
+    return null;
   }
 }
