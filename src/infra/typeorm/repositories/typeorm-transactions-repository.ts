@@ -34,27 +34,19 @@ export class TypeOrmTransactionsRepository
 
     const { income, outcome } = allTransactions.reduce(
       (accumulator: BalanceModel, transaction: Transaction) => {
-        switch (transaction.type) {
-          case "income":
-            accumulator.income += transaction.value;
-            break;
-          case "outcome":
-            accumulator.outcome += transaction.value;
-            break;
-          default:
-            break;
-        }
+        const { type } = transaction;
+
+        accumulator[type] += transaction.value;
+
         return accumulator;
       },
       balanceInitialValueToReduce,
     );
 
-    const total = income - outcome;
-
     const balance = {
       income,
       outcome,
-      total,
+      total: income - outcome,
     };
 
     return balance;
