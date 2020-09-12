@@ -32,21 +32,29 @@ const mockRequest = () => ({ body: null });
 describe("Controller Error Decorator (Main)", () => {
   it("should call controller-decoratee.handle", async () => {
     const { sut, controllerSpy } = makeSut();
+
     const httpRequest = mockRequest();
+
     await sut.handle(httpRequest);
+
     expect(controllerSpy.httpRequest).toEqual(httpRequest);
   });
 
   it("should return the same result of the controller-decoratee", async () => {
     const { sut, controllerSpy } = makeSut();
+
     const httpResponse = await sut.handle(mockRequest());
+
     expect(httpResponse).toEqual(controllerSpy.httpResponse);
   });
 
   it("should return server-error (500) if controller-decoratee throws", async () => {
     const { sut, controllerSpy } = makeSut();
+
     jest.spyOn(controllerSpy, "handle").mockImplementationOnce(mockThrowError);
+
     const httpResponse = await sut.handle(mockRequest());
+
     expect(httpResponse).toEqual(serverError(new ServerError("")));
   });
 });
