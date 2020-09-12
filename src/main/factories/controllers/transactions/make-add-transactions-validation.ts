@@ -1,6 +1,7 @@
 import { IValidation } from "@/presentation/protocols";
 import { ValidationComposite } from "@/validation/composite/validation-composite";
 import {
+  AllowedFieldValidation,
   OverLimitFieldValidation,
   RequiredFieldValidation,
 } from "@/validation/validators";
@@ -13,7 +14,8 @@ export const makeAddTransactionValidation = (): IValidation => {
     validations.push(new RequiredFieldValidation(field));
   }
 
-  validations.push(new OverLimitFieldValidation("type", 0));
+  validations.push(new OverLimitFieldValidation("value", 0));
+  validations.push(new AllowedFieldValidation("type", ["income", "outcome"]));
 
   const addTransactionValidation = new ValidationComposite(validations);
 
