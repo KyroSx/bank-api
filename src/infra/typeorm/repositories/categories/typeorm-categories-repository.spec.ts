@@ -26,7 +26,7 @@ describe("TypeOrm Categories Repository (Infra)", () => {
   it("should add new Category to database", async () => {
     const { sut } = makeSut();
 
-    const category = await sut.fetchByTitle("any-title");
+    const category = await sut.fetchOrAddByTitle("any-title");
 
     expect(category.id).toBeDefined();
     expect(category).toEqual(expect.objectContaining({ title: "any-title" }));
@@ -36,7 +36,7 @@ describe("TypeOrm Categories Repository (Infra)", () => {
     const { sut } = makeSut();
 
     const categoryExists = await addTypeOrmCategory();
-    const categoryFetched = await sut.fetchByTitle(categoryExists.title);
+    const categoryFetched = await sut.fetchOrAddByTitle(categoryExists.title);
 
     expect(categoryFetched).toEqual(categoryExists);
   });

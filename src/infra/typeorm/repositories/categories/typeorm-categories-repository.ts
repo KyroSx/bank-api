@@ -1,14 +1,16 @@
+import { IFetchOrAddCategoryRepository } from "@/data/protocols/repositories";
 import { Repository, getRepository } from "typeorm";
 import { Category } from "../../entities";
 
-export class TypeOrmCategoriesRepository {
+export class TypeOrmCategoriesRepository
+  implements IFetchOrAddCategoryRepository {
   private ormRepository: Repository<Category>;
 
   constructor() {
     this.ormRepository = getRepository(Category);
   }
 
-  async fetchByTitle(title: string) {
+  async fetchOrAddByTitle(title: string): Promise<Category> {
     const categoryExisting = await this.ormRepository.findOne({
       where: { title },
     });

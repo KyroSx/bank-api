@@ -24,7 +24,7 @@ export class DbAddTransaction implements IAddTransaction {
       category: categoryTitle,
     } = addTransactionParams;
 
-    const category = await this.fetchOrAddCategoryRepository.fetchByTitle(
+    const category = await this.fetchOrAddCategoryRepository.fetchOrAddByTitle(
       categoryTitle,
     );
 

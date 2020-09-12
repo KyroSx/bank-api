@@ -7,7 +7,7 @@ class FetchOrAddCategoryRepositorySpy implements IFetchOrAddCategoryRepository {
 
   model: CategoryModel = mockCategoryModel();
 
-  async fetchByTitle(params: string): Promise<CategoryModel> {
+  async fetchOrAddByTitle(params: string): Promise<CategoryModel> {
     this.params = params;
 
     return this.model;
