@@ -1,4 +1,5 @@
 import { mockThrowError, mockTransactionModel } from "@/domain/tests";
+import { ServerError } from "@/presentation/errors";
 import { serverError, success } from "@/presentation/helpers/http-helper";
 import {
   HttpRequest,
@@ -45,6 +46,6 @@ describe("Controller Error Decorator (Main)", () => {
     const { sut, controllerSpy } = makeSut();
     jest.spyOn(controllerSpy, "handle").mockImplementationOnce(mockThrowError);
     const httpResponse = await sut.handle(mockRequest());
-    expect(httpResponse).toEqual(serverError(new Error("")));
+    expect(httpResponse).toEqual(serverError(new ServerError("")));
   });
 });

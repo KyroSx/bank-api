@@ -1,4 +1,5 @@
 import { HttpResponse } from "@/presentation/protocols/http";
+import { ServerError } from "../errors";
 
 export const badRequest = (error: Error): HttpResponse => ({
   statusCode: 400,
@@ -17,5 +18,5 @@ export const forbidden = (error: Error): HttpResponse => ({
 
 export const serverError = (error: Error): HttpResponse => ({
   statusCode: 500,
-  body: error,
+  body: new ServerError(error.stack),
 });
