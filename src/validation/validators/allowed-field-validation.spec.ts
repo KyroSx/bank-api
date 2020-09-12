@@ -3,8 +3,8 @@ import { AllowedFieldValidation } from "./allowed-field-validation";
 
 const field = "any-field";
 
-const makeSut = (list: any[] = [field]) => {
-  const sut = new AllowedFieldValidation(list);
+const makeSut = (list: any[] = [field], fieldName = "type") => {
+  const sut = new AllowedFieldValidation(fieldName, list);
 
   return { sut };
 };
@@ -15,7 +15,7 @@ describe("AllowedField Validation", () => {
 
     const error = await sut.validate(field);
 
-    expect(error).toEqual(new NotAllowedParamError(field));
+    expect(error).toEqual(new NotAllowedParamError("type"));
   });
 
   it("should not return NotAllowedParamError if validation succeeds", async () => {
