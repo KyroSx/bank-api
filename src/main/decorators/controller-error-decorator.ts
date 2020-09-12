@@ -1,3 +1,4 @@
+import { serverError } from "@/presentation/helpers/http-helper";
 import {
   IController,
   HttpRequest,
@@ -8,8 +9,12 @@ export class ControllerErrorDecorator implements IController {
   constructor(private readonly controller: IController) {}
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-    const httpResponse = await this.controller.handle(httpRequest);
+    try {
+      const httpResponse = await this.controller.handle(httpRequest);
 
-    return httpResponse;
+      return httpResponse;
+    } catch (error) {
+      return serverError(error);
+    }
   }
 }

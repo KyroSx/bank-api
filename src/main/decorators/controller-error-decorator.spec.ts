@@ -1,5 +1,5 @@
-import { mockTransactionModel } from "@/domain/tests";
-import { success } from "@/presentation/helpers/http-helper";
+import { mockThrowError, mockTransactionModel } from "@/domain/tests";
+import { serverError, success } from "@/presentation/helpers/http-helper";
 import {
   HttpRequest,
   HttpResponse,
@@ -39,5 +39,12 @@ describe("Controller Error Decorator (Main)", () => {
     const { sut, controllerSpy } = makeSut();
     const httpResponse = await sut.handle(mockRequest());
     expect(httpResponse).toEqual(controllerSpy.httpResponse);
+  });
+
+  it("should return server-error (500) if controller-decoratee throws", async () => {
+    const { sut, controllerSpy } = makeSut();
+    jest.spyOn(controllerSpy, "handle").mockImplementationOnce(mockThrowError);
+    const httpResponse = await sut.handle(mockRequest());
+    expect(httpResponse).toEqual(serverError(new Error("")));
   });
 });
