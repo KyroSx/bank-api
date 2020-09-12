@@ -9,7 +9,11 @@ export class TypeOrmCategoriesRepository {
   }
 
   async fetchByTitle(title: string) {
-    const category = this.ormRepository.create({ title });
+    const categoryExisting = await this.ormRepository.findOne({
+      where: { title },
+    });
+
+    const category = categoryExisting || this.ormRepository.create({ title });
 
     await this.ormRepository.save(category);
 

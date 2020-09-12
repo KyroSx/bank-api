@@ -1,4 +1,5 @@
 import { createTestConnection } from "@/infra/tests/create-test-connection";
+import { addTypeOrmCategory } from "@/infra/tests/typeorm-category";
 import { getConnection } from "typeorm";
 import { TypeOrmCategoriesRepository } from "./typeorm-categories-repository";
 
@@ -29,5 +30,14 @@ describe("TypeOrm Categories Repository (Infra)", () => {
 
     expect(category.id).toBeDefined();
     expect(category).toEqual(expect.objectContaining({ title: "any-title" }));
+  });
+
+  it("should fetch existing Category instead of adding", async () => {
+    const { sut } = makeSut();
+
+    const categoryExists = await addTypeOrmCategory();
+    const categoryFetched = await sut.fetchByTitle(categoryExists.title);
+
+    expect(categoryFetched).toEqual(categoryExists);
   });
 });
