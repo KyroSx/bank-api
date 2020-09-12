@@ -1,5 +1,6 @@
-import { getConnection, createConnection, getRepository } from "typeorm";
+import { getConnection, createConnection } from "typeorm";
 import { mockTransactionModel } from "@/domain/tests";
+import { addTypeOrmCategory } from "@/infra/tests/typeorm-category";
 import { Category, Transaction } from "../entities";
 import { TypeOrmTransactionsRepository } from "./typeorm-transactions-repository";
 
@@ -15,15 +16,6 @@ const mockAddTransactionRepositoryParams = (category: Category) => {
   model.category = category;
 
   return model;
-};
-
-const insertCategory = async (): Promise<Category> => {
-  const repo = getRepository(Category);
-  const category = repo.create({ title: "any-title" });
-
-  await repo.save(category);
-
-  return category;
 };
 
 describe("Transactions Repository (Infra)", () => {
@@ -51,7 +43,7 @@ describe("Transactions Repository (Infra)", () => {
   it("should add Transaction to database", async () => {
     const { sut } = makeSut();
 
-    const category = await insertCategory();
+    const category = await addTypeOrmCategory();
     const params = mockAddTransactionRepositoryParams(category);
 
     const transaction = await sut.add(params);

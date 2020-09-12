@@ -10,7 +10,7 @@ export class TypeOrmTransactionsRepository
   private ormRepository: Repository<Transaction>;
 
   constructor() {
-    this.ormRepository = getRepository("transactions");
+    this.ormRepository = getRepository(Transaction);
   }
 
   async add(params: AddTransactionRepositoryParams) {
