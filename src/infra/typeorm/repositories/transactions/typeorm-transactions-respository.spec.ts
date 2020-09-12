@@ -1,8 +1,9 @@
-import { getConnection, createConnection } from "typeorm";
+import { getConnection } from "typeorm";
 import { mockTransactionModel } from "@/domain/tests";
 import { addTypeOrmCategory } from "@/infra/tests/typeorm-category";
 import { addTypeOrmTransaction } from "@/infra/tests/typeorm-transaction";
-import { Category, Transaction } from "../../entities";
+import { createTestConnection } from "@/infra/tests/create-test-connection";
+import { Category } from "../../entities";
 import { TypeOrmTransactionsRepository } from "./typeorm-transactions-repository";
 
 const makeSut = () => {
@@ -21,14 +22,7 @@ const mockAddTransactionRepositoryParams = (category: Category) => {
 
 describe("Transactions Repository (Infra)", () => {
   beforeEach(() => {
-    return createConnection({
-      type: "sqlite",
-      database: ":memory:",
-      dropSchema: true,
-      entities: [Category, Transaction],
-      synchronize: true,
-      logging: false,
-    });
+    return createTestConnection();
   });
 
   afterEach(() => {
