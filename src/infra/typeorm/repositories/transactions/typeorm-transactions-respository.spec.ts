@@ -2,7 +2,7 @@ import { getConnection, createConnection } from "typeorm";
 import { mockTransactionModel } from "@/domain/tests";
 import { addTypeOrmCategory } from "@/infra/tests/typeorm-category";
 import { addTypeOrmTransaction } from "@/infra/tests/typeorm-transaction";
-import { Category, Transaction } from "../entities";
+import { Category, Transaction } from "../../entities";
 import { TypeOrmTransactionsRepository } from "./typeorm-transactions-repository";
 
 const makeSut = () => {

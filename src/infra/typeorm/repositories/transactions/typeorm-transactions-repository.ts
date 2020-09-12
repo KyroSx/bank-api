@@ -5,7 +5,7 @@ import {
   IFetchBalanceRepository,
 } from "@/data/protocols/repositories";
 import { BalanceModel } from "@/domain/models";
-import { Transaction } from "../entities";
+import { Transaction } from "../../entities";
 
 export class TypeOrmTransactionsRepository
   implements IAddTransactionRepository, IFetchBalanceRepository {
