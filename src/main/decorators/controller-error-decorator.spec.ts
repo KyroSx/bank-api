@@ -1,4 +1,4 @@
-import { mockThrowError, mockTransactionModel } from "@/domain/tests";
+import { mockThrowError } from "@/domain/tests";
 import { ServerError } from "@/presentation/errors";
 import { serverError, success } from "@/presentation/helpers/http-helper";
 import {
@@ -9,12 +9,13 @@ import {
 import { ControllerErrorDecorator } from "./controller-error-decorator";
 
 class ControllerSpy implements IController {
-  httpResponse = success(mockTransactionModel());
+  httpResponse = success({});
 
   httpRequest: HttpRequest;
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     this.httpRequest = httpRequest;
+
     return this.httpResponse;
   }
 }
