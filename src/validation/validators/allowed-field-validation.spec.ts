@@ -17,4 +17,12 @@ describe("AllowedField Validation", () => {
 
     expect(error).toEqual(new NotAllowedParamError(field));
   });
+
+  it("should not return NotAllowedParamError if validation succeeds", async () => {
+    const { sut } = makeSut();
+
+    const error = await sut.validate(field);
+
+    expect(error).toBeFalsy();
+  });
 });
