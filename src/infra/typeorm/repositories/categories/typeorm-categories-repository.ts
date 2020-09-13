@@ -1,6 +1,8 @@
-import { IFetchOrAddCategoryRepository } from "@/data/protocols/repositories";
 import { Repository, getRepository } from "typeorm";
-import { Category } from "../../entities";
+import {
+  Category,
+  IFetchOrAddCategoryRepository,
+} from "./typeorm-categories-repository-protocols";
 
 export class TypeOrmCategoriesRepository
   implements IFetchOrAddCategoryRepository {
