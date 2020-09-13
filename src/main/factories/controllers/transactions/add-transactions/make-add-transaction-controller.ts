@@ -1,6 +1,6 @@
+import { makeControllerErrorDecorator } from "@/main/factories/decorators/make-controller-error-decorator";
+import { makeDbAddTransaction } from "@/main/factories/usecases/transactions/make-db-add-transaction";
 import { AddTransactionController } from "@/presentation/controllers/transactions/";
-import { makeControllerErrorDecorator } from "../../decorators/make-controller-error-decorator";
-import { makeDbAddTransaction } from "../../usecases/transactions/make-db-add-transaction";
 import { makeAddTransactionValidation } from "./make-add-transactions-validation";
 
 export const makeAddTransactionController = () => {
