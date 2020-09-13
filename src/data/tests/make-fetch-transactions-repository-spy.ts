@@ -1,13 +1,15 @@
-import { mockTransactionsWithBalanceModel } from "@/domain/tests";
-import { TransactionsWithBalanceModel } from "@/domain/usecases/fetch-transactions";
+import { TransactionModel } from "@/domain/models";
+import { mockTransactionModel } from "@/domain/tests";
 import { IFetchTransactionsRepository } from "../protocols/repositories";
 
 class FetchTransactionsRepositorySpy implements IFetchTransactionsRepository {
-  model: TransactionsWithBalanceModel = mockTransactionsWithBalanceModel();
+  model: TransactionModel[] = Array.from({ length: 5 }, () =>
+    mockTransactionModel(),
+  );
 
   calls = 0;
 
-  async fetch(): Promise<TransactionsWithBalanceModel> {
+  async fetch(): Promise<TransactionModel[]> {
     this.calls += 1;
 
     return this.model;

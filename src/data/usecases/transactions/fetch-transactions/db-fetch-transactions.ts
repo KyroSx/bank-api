@@ -10,10 +10,15 @@ export class DbFetchTransactions {
   ) {}
 
   async fetch() {
-    await this.fetchTransactionsRepository.fetch();
+    const transactions = await this.fetchTransactionsRepository.fetch();
 
-    await this.fetchBalanceRepository.fetchBalance();
+    const balance = await this.fetchBalanceRepository.fetchBalance();
 
-    return null;
+    const transactionWithBalance = {
+      transactions,
+      balance,
+    };
+
+    return transactionWithBalance;
   }
 }

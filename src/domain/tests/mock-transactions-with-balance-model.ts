@@ -1,12 +1,13 @@
 import { TransactionsWithBalanceModel } from "../usecases/fetch-transactions";
+import { mockBalanceModel } from "./mock-balance-model";
 import { mockTransactionModel } from "./mock-transaction-model";
 
 export const mockTransactionsWithBalanceModel = (
   length = 5,
 ): TransactionsWithBalanceModel => {
-  const transactions = Array.from({ length }).map(() => mockTransactionModel());
+  const transactions = Array.from({ length }, () => mockTransactionModel());
 
-  const balance = { total: 1000, income: 2000, outcome: 1000 };
+  const balance = mockBalanceModel();
 
   return { transactions, balance };
 };

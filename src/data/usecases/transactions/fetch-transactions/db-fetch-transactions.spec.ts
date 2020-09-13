@@ -2,6 +2,8 @@ import {
   makeFetchBalanceRepositorySpy,
   makeFetchTransactionsRepositorySpy,
 } from "@/data/tests";
+import { mockTransactionsWithBalanceModel } from "@/domain/tests";
+import { mockBalanceModel } from "@/domain/tests/mock-balance-model";
 import { DbFetchTransactions } from "./db-fetch-transactions";
 
 const makeSut = () => {
@@ -30,5 +32,16 @@ describe("Data => Db Fetch Transactions", () => {
     await sut.fetch();
 
     expect(fetchBalanceRepositorySpy.calls).toBe(1);
+  });
+
+  it("should return TransactionsWithBalanceModel", async () => {
+    const { sut, fetchBalanceRepositorySpy } = makeSut();
+
+    fetchBalanceRepositorySpy.model = mockBalanceModel();
+    const mockTransactionsWithBalance = mockTransactionsWithBalanceModel();
+
+    const transactionsWithBalance = await sut.fetch();
+
+    expect(transactionsWithBalance).toEqual(mockTransactionsWithBalance);
   });
 });

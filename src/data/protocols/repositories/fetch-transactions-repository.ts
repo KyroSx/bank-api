@@ -1,5 +1,5 @@
-import { TransactionsWithBalanceModel } from "@/domain/usecases/fetch-transactions";
+import { TransactionModel } from "@/domain/models";
 
 export interface IFetchTransactionsRepository {
-  fetch: () => Promise<TransactionsWithBalanceModel>;
+  fetch: () => Promise<TransactionModel[]>;
 }
