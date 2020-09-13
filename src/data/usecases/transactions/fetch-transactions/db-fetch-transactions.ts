@@ -1,7 +1,7 @@
 import {
   IFetchBalanceRepository,
   IFetchTransactionsRepository,
-} from "./db-fetch-transactions-procotols";
+} from "./db-fetch-transactions-protocols";
 
 export class DbFetchTransactions {
   constructor(
