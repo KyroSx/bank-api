@@ -3,16 +3,26 @@ import {
   IAddTransactionRepository,
   AddTransactionRepositoryParams,
   IFetchBalanceRepository,
+  IFetchTransactionsRepository,
 } from "@/data/protocols/repositories";
-import { BalanceModel } from "@/domain/models";
+import { BalanceModel, TransactionModel } from "@/domain/models";
 import { Transaction } from "../../entities";
 
 export class TypeOrmTransactionsRepository
-  implements IAddTransactionRepository, IFetchBalanceRepository {
+  implements
+    IAddTransactionRepository,
+    IFetchBalanceRepository,
+    IFetchTransactionsRepository {
   private ormRepository: Repository<Transaction>;
 
   constructor() {
     this.ormRepository = getRepository(Transaction);
+  }
+
+  async fetch(): Promise<TransactionModel[]> {
+    const allTransactions = await this.ormRepository.find();
+
+    return allTransactions;
   }
 
   async add(params: AddTransactionRepositoryParams) {
@@ -24,7 +34,7 @@ export class TypeOrmTransactionsRepository
   }
 
   async fetchBalance(): Promise<BalanceModel> {
-    const allTransactions = await this.ormRepository.find();
+    const allTransactions = await this.fetch();
 
     const balanceInitialValueToReduce = {
       income: 0,

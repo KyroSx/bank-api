@@ -8,6 +8,7 @@ import { TypeOrmTransactionsRepository } from "./typeorm-transactions-repository
 
 const makeSut = () => {
   const sut = new TypeOrmTransactionsRepository();
+
   return { sut };
 };
 
@@ -71,5 +72,31 @@ describe("Transactions Repository (Infra)", () => {
       income: 1000,
       outcome: 1000,
     });
+  });
+
+  it("should fetch all transactions", async () => {
+    const { sut } = makeSut();
+
+    const category = await addTypeOrmCategory();
+
+    const transaction_income = mockAddTransactionRepositoryParams(category);
+    transaction_income.type = "income";
+    transaction_income.value = 1000;
+
+    const transaction_outcome = mockAddTransactionRepositoryParams(category);
+    transaction_outcome.type = "outcome";
+    transaction_outcome.value = 1000;
+
+    await addTypeOrmTransaction(transaction_income);
+    await addTypeOrmTransaction(transaction_outcome);
+
+    const transactions = await sut.fetch();
+
+    expect(transactions).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining(transaction_outcome),
+        expect.objectContaining(transaction_income),
+      ]),
+    );
   });
 });
