@@ -2,7 +2,10 @@ import {
   makeFetchBalanceRepositorySpy,
   makeFetchTransactionsRepositorySpy,
 } from "@/data/tests";
-import { mockTransactionsWithBalanceModel } from "@/domain/tests";
+import {
+  mockThrowError,
+  mockTransactionsWithBalanceModel,
+} from "@/domain/tests";
 import { mockBalanceModel } from "@/domain/tests/mock-balance-model";
 import { DbFetchTransactions } from "./db-fetch-transactions";
 
@@ -43,5 +46,17 @@ describe("Data => Db Fetch Transactions", () => {
     const transactionsWithBalance = await sut.fetch();
 
     expect(transactionsWithBalance).toEqual(mockTransactionsWithBalance);
+  });
+
+  it("should throw if FetchBalanceRepositorySpy throws", async () => {
+    const { sut, fetchBalanceRepositorySpy } = makeSut();
+
+    jest
+      .spyOn(fetchBalanceRepositorySpy, "fetchBalance")
+      .mockImplementationOnce(mockThrowError);
+
+    const promise = sut.fetch();
+
+    await expect(promise).rejects.toThrow();
   });
 });
