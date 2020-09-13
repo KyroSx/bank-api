@@ -48,11 +48,23 @@ describe("Data => Db Fetch Transactions", () => {
     expect(transactionsWithBalance).toEqual(mockTransactionsWithBalance);
   });
 
-  it("should throw if FetchBalanceRepositorySpy throws", async () => {
+  it("should throw if FetchBalanceRepository throws", async () => {
     const { sut, fetchBalanceRepositorySpy } = makeSut();
 
     jest
       .spyOn(fetchBalanceRepositorySpy, "fetchBalance")
+      .mockImplementationOnce(mockThrowError);
+
+    const promise = sut.fetch();
+
+    await expect(promise).rejects.toThrow();
+  });
+
+  it("should throw if FetchTransactionsRepository throws", async () => {
+    const { sut, fetchTransactionsRepositorySpy } = makeSut();
+
+    jest
+      .spyOn(fetchTransactionsRepositorySpy, "fetch")
       .mockImplementationOnce(mockThrowError);
 
     const promise = sut.fetch();
