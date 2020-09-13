@@ -1,4 +1,4 @@
-import { DbAddTransaction } from "@/data/usecases/transactions/db-add-transaction";
+import { DbAddTransaction } from "@/data/usecases/transactions/add-transaction/db-add-transaction";
 import { TypeOrmCategoriesRepository } from "@/infra/typeorm/repositories/categories/typeorm-categories-repository";
 import { TypeOrmTransactionsRepository } from "@/infra/typeorm/repositories/transactions/typeorm-transactions-repository";
 
