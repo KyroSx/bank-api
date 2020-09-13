@@ -1,3 +1,4 @@
+import { mockThrowError } from "@/domain/tests";
 import { success } from "@/presentation/helpers/http-helper";
 import { makeFetchTransactionsSpy } from "@/presentation/tests";
 import { FetchTransactionsController } from "./fetch-transactions-controller";
@@ -10,7 +11,7 @@ const makeSut = () => {
 };
 
 describe("Presentation => Fetch Transactions Controller", () => {
-  it("should call FetchValidations", async () => {
+  it("should call FetchTransactions", async () => {
     const { sut, fetchTransactions } = makeSut();
 
     await sut.handle();
@@ -24,5 +25,17 @@ describe("Presentation => Fetch Transactions Controller", () => {
     const transaction = await sut.handle();
 
     expect(transaction).toEqual(success(fetchTransactions.model));
+  });
+
+  it("should throw if FetchTransactions throws", async () => {
+    const { sut, fetchTransactions } = makeSut();
+
+    jest
+      .spyOn(fetchTransactions, "fetch")
+      .mockImplementationOnce(mockThrowError);
+
+    const promise = sut.handle();
+
+    await expect(promise).rejects.toThrow();
   });
 });
