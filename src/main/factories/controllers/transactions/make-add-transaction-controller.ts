@@ -1,4 +1,4 @@
-import { AddTransactionController } from "@/presentation/controllers/transactions/add-transaction/add-transaction-controller";
+import { AddTransactionController } from "@/presentation/controllers/transactions/";
 import { makeControllerErrorDecorator } from "../../decorators/make-controller-error-decorator";
 import { makeDbAddTransaction } from "../../usecases/transactions/make-db-add-transaction";
 import { makeAddTransactionValidation } from "./make-add-transactions-validation";
