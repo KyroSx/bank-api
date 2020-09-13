@@ -9,6 +9,7 @@ import {
   IController,
   HttpRequest,
   HttpResponse,
+  InsufficientBalanceError,
 } from "./add-transaction-controller-protocols";
 
 export class AddTransactionController implements IController {
@@ -34,7 +35,7 @@ export class AddTransactionController implements IController {
     });
 
     if (!transaction) {
-      return forbidden(new Error());
+      return forbidden(new InsufficientBalanceError());
     }
 
     return success(transaction);

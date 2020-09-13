@@ -1,4 +1,5 @@
 import { mockThrowError } from "@/domain/tests/mock-throw-error";
+import { InsufficientBalanceError } from "@/presentation/errors";
 import {
   badRequest,
   success,
@@ -83,6 +84,6 @@ describe("Add Transaction Controller (Presentation)", () => {
 
     const httpResponse = await sut.handle(mockHttpRequest());
 
-    expect(httpResponse).toEqual(forbidden(new Error()));
+    expect(httpResponse).toEqual(forbidden(new InsufficientBalanceError()));
   });
 });
