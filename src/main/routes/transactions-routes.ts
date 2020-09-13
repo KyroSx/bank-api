@@ -1,7 +1,9 @@
 import { Router } from "express";
 import { adaptRoute } from "../adapters/express-route-adapter";
-import { makeAddTransactionController } from "../factories/controllers/transactions";
-import { makeFetchTransactionsController } from "../factories/controllers/transactions/fetch-transactions/make-fetch-transactions-controller";
+import {
+  makeAddTransactionController,
+  makeFetchTransactionsController,
+} from "../factories/controllers/transactions";
 
 export const transactionRoutes = (router: Router): Router => {
   router.post("/transactions", adaptRoute(makeAddTransactionController()));
