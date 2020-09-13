@@ -1,5 +1,5 @@
 import { BalanceModel } from "@/domain/models";
-import { IFetchBalanceRepository } from "../protocols/repositories/fetch-balance-repository";
+import { IFetchBalanceRepository } from "../protocols/repositories";
 
 class FetchBalanceRepositorySpy implements IFetchBalanceRepository {
   model: BalanceModel = { total: 100000000, income: 0, outcome: 0 };

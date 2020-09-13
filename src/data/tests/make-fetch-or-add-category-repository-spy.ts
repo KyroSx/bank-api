@@ -1,5 +1,5 @@
 import { CategoryModel } from "@/domain/models";
-import { IFetchOrAddCategoryRepository } from "@/data/protocols/repositories/fetch-or-add-category-repository";
+import { IFetchOrAddCategoryRepository } from "@/data/protocols/repositories/";
 import { mockCategoryModel } from "@/domain/tests";
 
 class FetchOrAddCategoryRepositorySpy implements IFetchOrAddCategoryRepository {

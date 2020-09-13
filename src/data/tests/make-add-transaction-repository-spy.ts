@@ -3,7 +3,7 @@ import { mockTransactionModel } from "@/domain/tests";
 import {
   IAddTransactionRepository,
   AddTransactionRepositoryParams,
-} from "../protocols/repositories/add-transaction-repository";
+} from "../protocols/repositories";
 
 class AddTransactionRepositorySpy implements IAddTransactionRepository {
   params: AddTransactionRepositoryParams;
