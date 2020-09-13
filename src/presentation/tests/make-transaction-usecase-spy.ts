@@ -3,10 +3,13 @@ import {
   AddTransactionParams,
 } from "@/domain/usecases/add-transaction";
 import { TransactionModel } from "@/domain/models";
-import { mockTransactionModel } from "@/domain/tests";
+import {
+  mockTransactionModel,
+  mockTransactionsWithBalanceModel,
+} from "@/domain/tests";
 import {
   IFetchTransactions,
-  TransactionsWithBalance,
+  TransactionsWithBalanceModel,
 } from "@/domain/usecases/fetch-transactions";
 
 class AddTransactionSpy implements IAddTransaction {
@@ -26,9 +29,9 @@ export const makeAddTransactionSpy = () => new AddTransactionSpy();
 class FetchTransactionsSpy implements IFetchTransactions {
   calls = 0;
 
-  model: TransactionsWithBalance;
+  model: TransactionsWithBalanceModel = mockTransactionsWithBalanceModel();
 
-  async fetch(): Promise<TransactionsWithBalance> {
+  async fetch(): Promise<TransactionsWithBalanceModel> {
     this.calls += 1;
 
     return this.model;

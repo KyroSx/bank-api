@@ -1,3 +1,4 @@
+import { success } from "@/presentation/helpers/http-helper";
 import { makeFetchTransactionsSpy } from "@/presentation/tests";
 import { FetchTransactionsController } from "./fetch-transactions-controller";
 
@@ -15,5 +16,13 @@ describe("Presentation => Fetch Transactions Controller", () => {
     await sut.handle();
 
     expect(fetchTransactions.calls).toBe(1);
+  });
+
+  it("should return success (200) with TransactionsWithBalanceModel", async () => {
+    const { sut, fetchTransactions } = makeSut();
+
+    const transaction = await sut.handle();
+
+    expect(transaction).toEqual(success(fetchTransactions.model));
   });
 });

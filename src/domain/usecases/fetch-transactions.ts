@@ -1,10 +1,10 @@
 import { BalanceModel, TransactionModel } from "@/domain/models";
 
-export type TransactionsWithBalance = {
+export type TransactionsWithBalanceModel = {
   transactions: TransactionModel[];
   balance: BalanceModel;
 };
 
 export interface IFetchTransactions {
-  fetch: () => Promise<TransactionsWithBalance>;
+  fetch: () => Promise<TransactionsWithBalanceModel>;
 }
