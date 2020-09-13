@@ -1,12 +1,13 @@
 import { Repository, getRepository } from "typeorm";
 import {
   IAddTransactionRepository,
-  AddTransactionRepositoryParams,
   IFetchBalanceRepository,
   IFetchTransactionsRepository,
-} from "@/data/protocols/repositories";
-import { BalanceModel, TransactionModel } from "@/domain/models";
-import { Transaction } from "../../entities";
+  TransactionModel,
+  AddTransactionRepositoryParams,
+  BalanceModel,
+  Transaction,
+} from "./typeorm-transactions-repository-protocols";
 
 export class TypeOrmTransactionsRepository
   implements
@@ -25,7 +26,7 @@ export class TypeOrmTransactionsRepository
     return allTransactions;
   }
 
-  async add(params: AddTransactionRepositoryParams) {
+  async add(params: AddTransactionRepositoryParams): Promise<TransactionModel> {
     const transaction = this.ormRepository.create(params);
 
     await this.ormRepository.save(transaction);
