@@ -1,4 +1,5 @@
 import { makeDeleteTransactionRepositorySpy } from "@/data/tests/make-delete-repository-spy";
+import { mockThrowError } from "@/domain/tests";
 import { DbDeleteTransaction } from "./db-delete-transaction";
 
 const makeSut = () => {
@@ -19,5 +20,17 @@ describe("Data => Db Delete Transaction", () => {
     await sut.delete({ transaction_id });
 
     expect(deleteTransactionRepositorySpy.params).toEqual({ transaction_id });
+  });
+
+  it("should throw if DeleteTransactionRepository throws", async () => {
+    const { sut, deleteTransactionRepositorySpy } = makeSut();
+
+    jest
+      .spyOn(deleteTransactionRepositorySpy, "delete")
+      .mockImplementationOnce(mockThrowError);
+
+    const promise = sut.delete(mockDeleteTransactionParams());
+
+    await expect(promise).rejects.toThrow();
   });
 });
