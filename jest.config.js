@@ -8,6 +8,8 @@ module.exports = {
     '!**/test/**',
     '!<rootDir>/src/domain/**/*.ts',
     '!<rootDir>/src/**/index.ts',
+    '!<rootDir>/src/infra/typeorm/entities/**/*.ts',
+    '!<rootDir>/src/infra/typeorm/migrations/**/*.ts',
   ],
   coverageDirectory: "coverage",
   coverageProvider: "v8",
