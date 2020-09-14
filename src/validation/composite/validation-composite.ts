@@ -5,15 +5,7 @@ export class ValidationComposite implements IValidation {
 
   async validate(input: any): Promise<Error | null> {
     const errors = await Promise.all(
-      this.validations.map(async (validation) => {
-        const error = await validation.validate(input);
-
-        if (error) {
-          return error;
-        }
-
-        return null;
-      }),
+      this.validations.map(async (validation) => validation.validate(input)),
     );
 
     const errorFound = errors.find((error) => error instanceof Error);
