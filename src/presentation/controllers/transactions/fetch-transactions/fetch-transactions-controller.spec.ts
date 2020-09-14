@@ -4,34 +4,34 @@ import { makeFetchTransactionsSpy } from "@/presentation/tests";
 import { FetchTransactionsWithBalanceController } from "./fetch-transactions-controller";
 
 const makeSut = () => {
-  const fetchTransactions = makeFetchTransactionsSpy();
-  const sut = new FetchTransactionsWithBalanceController(fetchTransactions);
+  const fetchTransactionsSpy = makeFetchTransactionsSpy();
+  const sut = new FetchTransactionsWithBalanceController(fetchTransactionsSpy);
 
-  return { sut, fetchTransactions };
+  return { sut, fetchTransactionsSpy };
 };
 
 describe("Presentation => Fetch Transactions Controller", () => {
   it("should call FetchTransactions", async () => {
-    const { sut, fetchTransactions } = makeSut();
+    const { sut, fetchTransactionsSpy } = makeSut();
 
     await sut.handle();
 
-    expect(fetchTransactions.calls).toBe(1);
+    expect(fetchTransactionsSpy.calls).toBe(1);
   });
 
   it("should return success (200) with TransactionsWithBalanceModel", async () => {
-    const { sut, fetchTransactions } = makeSut();
+    const { sut, fetchTransactionsSpy } = makeSut();
 
     const transaction = await sut.handle();
 
-    expect(transaction).toEqual(success(fetchTransactions.model));
+    expect(transaction).toEqual(success(fetchTransactionsSpy.model));
   });
 
   it("should throw if FetchTransactions throws", async () => {
-    const { sut, fetchTransactions } = makeSut();
+    const { sut, fetchTransactionsSpy } = makeSut();
 
     jest
-      .spyOn(fetchTransactions, "fetch")
+      .spyOn(fetchTransactionsSpy, "fetch")
       .mockImplementationOnce(mockThrowError);
 
     const promise = sut.handle();
