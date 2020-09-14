@@ -7,12 +7,12 @@ import {
   mockTransactionsWithBalanceModel,
 } from "@/domain/tests";
 import { mockBalanceModel } from "@/domain/tests/mock-balance-model";
-import { DbFetchTransactions } from "./db-fetch-transactions";
+import { DbFetchTransactionsWithBalance } from "./db-fetch-transactions";
 
 const makeSut = () => {
   const fetchTransactionsRepositorySpy = makeFetchTransactionsRepositorySpy();
   const fetchBalanceRepositorySpy = makeFetchBalanceRepositorySpy();
-  const sut = new DbFetchTransactions(
+  const sut = new DbFetchTransactionsWithBalance(
     fetchTransactionsRepositorySpy,
     fetchBalanceRepositorySpy,
   );
@@ -20,7 +20,7 @@ const makeSut = () => {
   return { sut, fetchTransactionsRepositorySpy, fetchBalanceRepositorySpy };
 };
 
-describe("Data => Db Fetch Transactions", () => {
+describe("Data => Db Fetch Transactions With Balance", () => {
   it("should call FetchTransactionsRepository", async () => {
     const { sut, fetchTransactionsRepositorySpy } = makeSut();
 

@@ -5,6 +5,6 @@ export type TransactionsWithBalanceModel = {
   balance: BalanceModel;
 };
 
-export interface IFetchTransactions {
+export interface IFetchTransactionsWithBalance {
   fetch: () => Promise<TransactionsWithBalanceModel>;
 }

@@ -1,4 +1,4 @@
-import { TransactionsWithBalanceModel } from "../usecases/fetch-transactions";
+import { TransactionsWithBalanceModel } from "../usecases/fetch-transactions-with-balance";
 import { mockBalanceModel } from "./mock-balance-model";
 import { mockTransactionModel } from "./mock-transaction-model";
 

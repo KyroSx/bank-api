@@ -1,10 +1,10 @@
-import { DbFetchTransactions } from "@/data/usecases/transactions/fetch-transactions/db-fetch-transactions";
+import { DbFetchTransactionsWithBalance } from "@/data/usecases/transactions/";
 import { TypeOrmTransactionsRepository } from "@/infra/typeorm/repositories/transactions/typeorm-transactions-repository";
 
-export const makeDbFetchTransactions = (): DbFetchTransactions => {
+export const makeDbFetchTransactionsWithBalance = (): DbFetchTransactionsWithBalance => {
   const transactionsRepository = new TypeOrmTransactionsRepository();
 
-  const dbFetchTransactions = new DbFetchTransactions(
+  const dbFetchTransactions = new DbFetchTransactionsWithBalance(
     transactionsRepository,
     transactionsRepository,
   );

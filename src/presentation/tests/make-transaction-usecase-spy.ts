@@ -8,9 +8,9 @@ import {
   mockTransactionsWithBalanceModel,
 } from "@/domain/tests";
 import {
-  IFetchTransactions,
+  IFetchTransactionsWithBalance,
   TransactionsWithBalanceModel,
-} from "@/domain/usecases/fetch-transactions";
+} from "../controllers/transactions/fetch-transactions/fetch-transactions-controller-protocols";
 
 class AddTransactionSpy implements IAddTransaction {
   params: AddTransactionParams;
@@ -26,7 +26,7 @@ class AddTransactionSpy implements IAddTransaction {
 
 export const makeAddTransactionSpy = () => new AddTransactionSpy();
 
-class FetchTransactionsSpy implements IFetchTransactions {
+class FetchTransactionsSpy implements IFetchTransactionsWithBalance {
   calls = 0;
 
   model: TransactionsWithBalanceModel = mockTransactionsWithBalanceModel();

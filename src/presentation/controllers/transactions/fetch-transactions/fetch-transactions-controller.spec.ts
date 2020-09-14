@@ -1,11 +1,11 @@
 import { mockThrowError } from "@/domain/tests";
 import { success } from "@/presentation/helpers/http-helper";
 import { makeFetchTransactionsSpy } from "@/presentation/tests";
-import { FetchTransactionsController } from "./fetch-transactions-controller";
+import { FetchTransactionsWithBalanceController } from "./fetch-transactions-controller";
 
 const makeSut = () => {
   const fetchTransactions = makeFetchTransactionsSpy();
-  const sut = new FetchTransactionsController(fetchTransactions);
+  const sut = new FetchTransactionsWithBalanceController(fetchTransactions);
 
   return { sut, fetchTransactions };
 };

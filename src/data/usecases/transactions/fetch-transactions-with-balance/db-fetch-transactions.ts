@@ -1,11 +1,12 @@
 import {
   IFetchBalanceRepository,
-  IFetchTransactions,
+  IFetchTransactionsWithBalance,
   IFetchTransactionsRepository,
   TransactionsWithBalanceModel,
 } from "./db-fetch-transactions-protocols";
 
-export class DbFetchTransactions implements IFetchTransactions {
+export class DbFetchTransactionsWithBalance
+  implements IFetchTransactionsWithBalance {
   constructor(
     private readonly fetchTransactionsRepository: IFetchTransactionsRepository,
     private readonly fetchBalanceRepository: IFetchBalanceRepository,

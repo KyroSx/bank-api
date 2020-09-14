@@ -3,11 +3,13 @@ import {
   HttpRequest,
   HttpResponse,
   IController,
-  IFetchTransactions,
+  IFetchTransactionsWithBalance,
 } from "./fetch-transactions-controller-protocols";
 
-export class FetchTransactionsController implements IController {
-  constructor(private readonly fetchTransactions: IFetchTransactions) {}
+export class FetchTransactionsWithBalanceController implements IController {
+  constructor(
+    private readonly fetchTransactions: IFetchTransactionsWithBalance,
+  ) {}
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async handle(httpRequest?: HttpRequest): Promise<HttpResponse> {

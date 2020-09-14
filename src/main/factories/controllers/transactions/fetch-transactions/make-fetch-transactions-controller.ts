@@ -1,11 +1,11 @@
 import { makeControllerErrorDecorator } from "@/main/factories/decorators/make-controller-error-decorator";
-import { makeDbFetchTransactions } from "@/main/factories/usecases/transactions";
-import { FetchTransactionsController } from "@/presentation/controllers/transactions/";
+import { makeDbFetchTransactionsWithBalance } from "@/main/factories/usecases/transactions";
+import { FetchTransactionsWithBalanceController } from "@/presentation/controllers/transactions/";
 
-export const makeFetchTransactionsController = () => {
-  const dbFetchTransactions = makeDbFetchTransactions();
+export const makeFetchTransactionsWithBalanceController = () => {
+  const dbFetchTransactions = makeDbFetchTransactionsWithBalance();
 
-  const addTransactionController = new FetchTransactionsController(
+  const addTransactionController = new FetchTransactionsWithBalanceController(
     dbFetchTransactions,
   );
 
