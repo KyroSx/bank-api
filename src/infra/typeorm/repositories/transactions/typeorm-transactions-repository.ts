@@ -21,7 +21,7 @@ export class TypeOrmTransactionsRepository
   }
 
   async fetch(): Promise<TransactionModel[]> {
-    const allTransactions = await this.ormRepository.find();
+    const allTransactions = await this.ormRepository.find({ cache: 10000 });
 
     return allTransactions;
   }
@@ -45,9 +45,9 @@ export class TypeOrmTransactionsRepository
 
     const { income, outcome } = allTransactions.reduce(
       (accumulator: BalanceModel, transaction: Transaction) => {
-        const { type } = transaction;
+        const { type, value } = transaction;
 
-        accumulator[type] += transaction.value;
+        accumulator[type] += value;
 
         return accumulator;
       },
