@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import "reflect-metadata";
+import "dotenv/config";
 import { createConnection } from "typeorm";
 
 createConnection("default")

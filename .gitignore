@@ -10,5 +10,5 @@ dist
 # tests
 coverage
 
-# database
-ormconfig.json
+# envs
+.env
